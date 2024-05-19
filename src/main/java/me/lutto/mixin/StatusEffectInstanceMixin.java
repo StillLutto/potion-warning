@@ -1,5 +1,6 @@
 package me.lutto.mixin;
 
+import me.lutto.HudDisplayHandler;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,7 +17,7 @@ public class StatusEffectInstanceMixin {
     @Inject(at = @At("TAIL"), method = "updateDuration")
     private void injectDuration(CallbackInfoReturnable<Integer> cir) {
         if (duration != 0) return;
-        // Further logic here
+        HudDisplayHandler.triggerHudDisplay();
     }
 
 }
