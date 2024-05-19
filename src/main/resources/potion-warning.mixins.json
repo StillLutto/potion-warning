@@ -6,6 +6,7 @@
   "mixins": [
   ],
   "client": [
+    "StatusEffectInstanceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
