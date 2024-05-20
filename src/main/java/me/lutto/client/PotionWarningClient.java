@@ -1,5 +1,6 @@
 package me.lutto.client;
 
+import me.lutto.TimerScheduler;
 import me.lutto.manager.StatusEffectHudManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -9,6 +10,7 @@ import net.minecraft.client.gui.DrawContext;
 public class PotionWarningClient implements ClientModInitializer {
 
     private static final StatusEffectHudManager statusEffectHudManager = new StatusEffectHudManager();
+    private static final TimerScheduler scheduler = new TimerScheduler();
 
     @Override
     public void onInitializeClient() {
@@ -22,6 +24,9 @@ public class PotionWarningClient implements ClientModInitializer {
 
     public static StatusEffectHudManager getStatusEffectHudManager() {
         return statusEffectHudManager;
+    }
+    public static TimerScheduler getScheduler() {
+        return scheduler;
     }
 
 }

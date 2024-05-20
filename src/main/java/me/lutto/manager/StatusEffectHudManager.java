@@ -1,6 +1,8 @@
 package me.lutto.manager;
 
+import me.lutto.TimerScheduler;
 import me.lutto.accessors.SchedulerAccessor;
+import me.lutto.client.PotionWarningClient;
 import net.minecraft.registry.Registries;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.server.MinecraftServer;
@@ -26,9 +28,9 @@ public class StatusEffectHudManager {
         }
     }
 
-    public void triggerHudDisplay(MinecraftServer server,  StatusEffect effect) {
+    public void triggerHudDisplay(StatusEffect effect) {
         showHudStatusEffect = effect;
-        ((SchedulerAccessor) server).runTaskLater(40L, () -> showHudStatusEffect = null);
+        PotionWarningClient.getScheduler().schedule(100, () -> showHudStatusEffect = null);
     }
 
     public StatusEffect getShowHudStatusEffect() {

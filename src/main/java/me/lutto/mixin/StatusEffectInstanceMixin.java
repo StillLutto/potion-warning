@@ -4,7 +4,6 @@ import me.lutto.client.PotionWarningClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,8 +23,7 @@ public class StatusEffectInstanceMixin {
     private void injectUpdate(LivingEntity entity, Runnable overwriteCallback, CallbackInfoReturnable<Boolean> cir) {
         if (duration != 0) return;
 
-        if (!(entity.getWorld() instanceof ServerWorld)) return;
-        PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(((ServerWorld) entity.getWorld()).getServer(), type);
+        PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(type);
     }
 
 }
