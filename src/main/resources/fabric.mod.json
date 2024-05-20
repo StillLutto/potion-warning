@@ -9,9 +9,11 @@
   ],
   "contact": {
     "website": "https://github.com/StillLutto/",
-    "repo": "https://github.com/StillLutto/potion-warning"
+    "repo": "https://github.com/StillLutto/potion-warning",
+    "homepage": "https://github.com/StillLutto/",
+    "sources": "https://github.com/StillLutto/",
+    "issues": "https://github.com/StillLutto/issues"
   },
-
   "license": "MIT",
   "icon": "assets/potion-warning/icon.png",
 
@@ -31,7 +33,21 @@
 
   "depends": {
     "fabricloader": ">=${loader_version}",
-        "fabric": "*",
+    "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": ">=7.0.1"
+  },
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "potion-warning",
+        "name": "Potion Warning",
+        "description": "This mod warns you if a certain potion effect has run out.",
+        "icon": "assets/potion-warning/icon.png"
+      },
+      "update_checker": true
+    }
   }
 }
