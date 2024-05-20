@@ -1,6 +1,6 @@
 package me.lutto.mixin;
 
-import me.lutto.accessors.SchedulerAccessor;
+import me.lutto.accessor.SchedulerAccessor;
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

@@ -1,11 +1,8 @@
 package me.lutto.manager;
 
-import me.lutto.TimerScheduler;
-import me.lutto.accessors.SchedulerAccessor;
 import me.lutto.client.PotionWarningClient;
 import net.minecraft.registry.Registries;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.server.MinecraftServer;
 
 import java.util.HashMap;
 

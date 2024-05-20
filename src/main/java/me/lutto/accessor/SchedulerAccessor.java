@@ -1,4 +1,4 @@
-package me.lutto.accessors;
+package me.lutto.accessor;
 
 public interface SchedulerAccessor {
     void runTaskLater(long ticksUntilSomething, Runnable runnable);
