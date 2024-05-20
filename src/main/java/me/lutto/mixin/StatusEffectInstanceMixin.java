@@ -1,8 +1,10 @@
 package me.lutto.mixin;
 
 import me.lutto.client.PotionWarningClient;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,10 +20,12 @@ public class StatusEffectInstanceMixin {
     @Shadow
     private StatusEffect type;
 
-    @Inject(at = @At("TAIL"), method = "updateDuration")
-    private void injectDuration(CallbackInfoReturnable<Integer> cir) {
+    @Inject(at = @At("TAIL"), method = "update")
+    private void injectUpdate(LivingEntity entity, Runnable overwriteCallback, CallbackInfoReturnable<Boolean> cir) {
         if (duration != 0) return;
-        PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(type);
+
+        if (!(entity.getWorld() instanceof ServerWorld)) return;
+        PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(((ServerWorld) entity.getWorld()).getServer(), type);
     }
 
 }

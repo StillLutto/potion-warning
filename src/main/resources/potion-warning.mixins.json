@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "StatusEffectInstanceMixin"
+    "StatusEffectInstanceMixin",
+    "TickMixin"
   ],
   "injectors": {
     "defaultRequire": 1

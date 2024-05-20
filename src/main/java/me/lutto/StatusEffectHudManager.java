@@ -2,8 +2,9 @@ package me.lutto;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.server.MinecraftServer;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class StatusEffectHudManager {
 
@@ -24,17 +25,9 @@ public class StatusEffectHudManager {
         }
     }
 
-    public void triggerHudDisplay(StatusEffect effect) {
+    public void triggerHudDisplay(MinecraftServer server,  StatusEffect effect) {
         showHudStatusEffect = effect;
-        TimerTask task = new TimerTask() {
-            public void run() {
-                showHudStatusEffect = null;
-            }
-        };
-        Timer timer = new Timer("Timer");
-
-        long delay = 5000L;
-        timer.schedule(task, delay);
+        ((SchedulerAccessor) server).runTaskLater(40L, () -> showHudStatusEffect = null);
     }
 
     public StatusEffect getShowHudStatusEffect() {
