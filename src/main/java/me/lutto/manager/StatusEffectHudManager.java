@@ -1,5 +1,6 @@
-package me.lutto;
+package me.lutto.manager;
 
+import me.lutto.accessors.SchedulerAccessor;
 import net.minecraft.registry.Registries;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.server.MinecraftServer;

@@ -1,6 +1,6 @@
 package me.lutto.client;
 
-import me.lutto.StatusEffectHudManager;
+import me.lutto.manager.StatusEffectHudManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
