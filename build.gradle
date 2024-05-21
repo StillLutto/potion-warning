@@ -11,10 +11,8 @@ base {
 }
 
 repositories {
-    maven {
-        name = "Terraformers"
-        url = "https://maven.terraformersmc.com/"
-    }
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.terraformersmc.com/releases/" }
 }
 
 dependencies {
@@ -28,6 +26,7 @@ dependencies {
 
     // Other APIs
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modApi "me.shedaniel.cloth:cloth-config-fabric:11.1.118"
 }
 
 processResources {

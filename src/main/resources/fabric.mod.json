@@ -24,12 +24,15 @@
     ],
     "main": [
       "me.lutto.PotionWarning"
+    ],
+    "modmenu": [
+      "me.lutto.compat.modmenu.ModMenuIntegration"
     ]
   },
 
-      "mixins": [
-        "potion-warning.mixins.json"
-      ],
+  "mixins": [
+    "potion-warning.mixins.json"
+    ],
 
   "depends": {
     "fabricloader": ">=${loader_version}",
@@ -41,12 +44,10 @@
   },
   "custom": {
     "modmenu": {
-      "parent": {
-        "id": "potion-warning",
-        "name": "Potion Warning",
-        "description": "This mod warns you if a certain potion effect has run out.",
-        "icon": "assets/potion-warning/icon.png"
-      },
+      "id": "potion-warning",
+      "name": "Potion Warning",
+      "description": "This mod warns you if a certain potion effect has run out.",
+      "icon": "assets/potion-warning/icon.png",
       "update_checker": true
     }
   }
