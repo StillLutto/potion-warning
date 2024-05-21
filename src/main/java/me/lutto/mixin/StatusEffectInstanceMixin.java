@@ -31,6 +31,7 @@ public class StatusEffectInstanceMixin {
     private void injectUpdate(LivingEntity entity, Runnable overwriteCallback, CallbackInfoReturnable<Boolean> cir) {
         if (duration != 0) return;
 
+        if (!(entity instanceof PlayerEntity)) return;
         PlayerEntity thisEntity = (PlayerEntity) entity;
         PlayerEntity localPlayer = MinecraftClient.getInstance().player;
         if (!thisEntity.equals(localPlayer)) return;
