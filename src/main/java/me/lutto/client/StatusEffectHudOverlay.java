@@ -14,11 +14,19 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
 
         if (!config.enabled) return;
         if (PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect() == null) return;
-        drawContext.drawText(MinecraftClient.getInstance().textRenderer,
-                PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString() + " has expired!",
-                (int) (drawContext.getScaledWindowWidth() * ((double) config.textPosX / 100)),
-                (int) (drawContext.getScaledWindowHeight() * ((double) config.textPosY / 100)),
-                config.textColor.getRgb(),
-                true);
+        if (config.centeredText) {
+            drawContext.drawCenteredTextWithShadow(MinecraftClient.getInstance().textRenderer,
+                    PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString() + " has expired!",
+                    (int) (drawContext.getScaledWindowWidth() * ((double) config.textPosX / 100)),
+                    (int) (drawContext.getScaledWindowHeight() * ((double) config.textPosY / 100)),
+                    config.textColor.getRgb());
+        } else {
+            drawContext.drawText(MinecraftClient.getInstance().textRenderer,
+                    PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString() + " has expired!",
+                    (int) (drawContext.getScaledWindowWidth() * ((double) config.textPosX / 100)),
+                    (int) (drawContext.getScaledWindowHeight() * ((double) config.textPosY / 100)),
+                    config.textColor.getRgb(),
+                    true);
+        }
     }
 }

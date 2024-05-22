@@ -6,7 +6,6 @@ import me.lutto.PotionWarning;
 import me.lutto.enums.Effects;
 import me.lutto.instance.Config;
 import me.shedaniel.clothconfig2.api.*;
-import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
@@ -46,13 +45,21 @@ public class ModMenuIntegration implements ModMenuApi {
                     .setSaveConsumer3(newValue -> config.textColor = newValue)
                     .build());
 
+            textCategory.addEntry(entryBuilder.startBooleanToggle(Text.of("Text Color"), config.centeredText)
+                    .setDefaultValue(false)
+                    .setTooltip(Text.of("Toggle centered text"))
+                    .setSaveConsumer(newValue -> config.centeredText = newValue)
+                    .build());
+
             textCategory.addEntry(entryBuilder.startIntSlider(Text.of("Text Position X"), config.textPosX, 1, 100)
                     .setDefaultValue(10)
+                    .setTooltip(Text.of("Select the text x position"))
                     .setSaveConsumer(newValue -> config.textPosX = newValue)
                     .build());
 
             textCategory.addEntry(entryBuilder.startIntSlider(Text.of("Text Position Y"), config.textPosY, 1, 100)
                     .setDefaultValue(10)
+                    .setTooltip(Text.of("Select the text y position"))
                     .setSaveConsumer(newValue -> config.textPosY = newValue)
                     .build());
 
