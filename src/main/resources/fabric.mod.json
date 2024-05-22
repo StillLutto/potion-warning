@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "potion-warning",
   "version": "${version}",
-  "name": "potion-warning",
+  "name": "PotionWarning",
   "description": "This mod warns you if a certain potion effect has run out.",
   "authors": [
     "StillLutto"
@@ -40,15 +40,7 @@
     "minecraft": "${minecraft_version}"
   },
   "suggests": {
-    "modmenu": ">=7.0.1"
-  },
-  "custom": {
-    "modmenu": {
-      "id": "potion-warning",
-      "name": "Potion Warning",
-      "description": "This mod warns you if a certain potion effect has run out.",
-      "icon": "assets/potion-warning/icon.png",
-      "update_checker": true
-    }
+    "modmenu": ">=7.0.1",
+    "cloth-config": ">=11.0.99"
   }
 }
