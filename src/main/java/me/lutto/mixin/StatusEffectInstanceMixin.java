@@ -1,17 +1,13 @@
 package me.lutto.mixin;
 
+import me.lutto.PotionWarning;
 import me.lutto.client.PotionWarningClient;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
+import me.lutto.enums.Effects;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,6 +31,11 @@ public class StatusEffectInstanceMixin {
         PlayerEntity thisEntity = (PlayerEntity) entity;
         PlayerEntity localPlayer = MinecraftClient.getInstance().player;
         if (!thisEntity.equals(localPlayer)) return;
+
+        Effects effect = PotionWarning.getConfigManager().getEffectEnum(type);
+        if (effect == null) return;
+        if (!effect.isActivated()) return;
+
         PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(type);
     }
 

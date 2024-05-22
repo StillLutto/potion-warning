@@ -3,8 +3,10 @@ package me.lutto.manager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.lutto.PotionWarning;
+import me.lutto.enums.Effects;
 import me.lutto.instance.Config;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.effect.StatusEffect;
 
 import java.io.*;
 
@@ -28,6 +30,14 @@ public class ConfigManager {
         } catch (IOException e) {
             PotionWarning.getLogger().error("Could not save config to file '" + CONFIG_FILE.getAbsolutePath() + "'", e);
         }
+    }
+
+    public Effects getEffectEnum(StatusEffect statusEffect) {
+        for (Effects effect : Effects.values()) {
+            if (effect.getStatusEffect() != statusEffect) continue;
+            return effect;
+        }
+        return null;
     }
 
     public Config getConfig() {
