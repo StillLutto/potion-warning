@@ -39,11 +39,21 @@ public class ModMenuIntegration implements ModMenuApi {
                     .build());
 
             // Text subcategory
-            SubCategoryBuilder textCategory = entryBuilder.startSubCategory(Text.of("Text Options"));
-            textCategory.add(0, entryBuilder.startColorField(Text.of("Text Color"), config.textColor)
+            ConfigCategory textCategory = builder.getOrCreateCategory(Text.of("Text Options"));
+            textCategory.addEntry(entryBuilder.startColorField(Text.of("Text Color"), config.textColor)
                     .setDefaultValue(TextColor.fromFormatting(Formatting.RED))
                     .setTooltip(Text.of("Select the text color"))
                     .setSaveConsumer3(newValue -> config.textColor = newValue)
+                    .build());
+
+            textCategory.addEntry(entryBuilder.startIntSlider(Text.of("Text Position X"), config.textPosX, 1, 100)
+                    .setDefaultValue(10)
+                    .setSaveConsumer(newValue -> config.textPosX = newValue)
+                    .build());
+
+            textCategory.addEntry(entryBuilder.startIntSlider(Text.of("Text Position Y"), config.textPosY, 1, 100)
+                    .setDefaultValue(10)
+                    .setSaveConsumer(newValue -> config.textPosY = newValue)
                     .build());
 
             // Effect options

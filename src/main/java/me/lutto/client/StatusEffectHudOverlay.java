@@ -12,12 +12,12 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
     public void onHudRender(DrawContext drawContext, float tickDelta) {
         Config config = PotionWarning.getConfigManager().getConfig();
 
-        if (!PotionWarning.getConfigManager().getConfig().enabled) return;
+        if (!config.enabled) return;
         if (PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect() == null) return;
         drawContext.drawText(MinecraftClient.getInstance().textRenderer,
                 PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString() + " has expired!",
-                14,
-                10,
+                (int) (drawContext.getScaledWindowWidth() * ((double) config.textPosX / 100)),
+                (int) (drawContext.getScaledWindowHeight() * ((double) config.textPosY / 100)),
                 config.textColor.getRgb(),
                 true);
     }

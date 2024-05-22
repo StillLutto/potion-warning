@@ -9,6 +9,8 @@ public class Config {
 
     // Text options
     public TextColor textColor = TextColor.fromFormatting(Formatting.RED);
+    public int textPosX = 10;
+    public int textPosY = 10;
 
     // Effect options
     public boolean SPEED = true;
