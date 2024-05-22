@@ -4,8 +4,13 @@ import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 
 public class Config {
+    // General options
+    public boolean enabled = true;
+
+    // Text options
     public TextColor textColor = TextColor.fromFormatting(Formatting.RED);
 
+    // Effect options
     public boolean SPEED = true;
     public boolean SLOWNESS = true;
     public boolean HASTE = true;
