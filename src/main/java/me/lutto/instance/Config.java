@@ -8,6 +8,7 @@ public class Config {
     public boolean enabled = true;
 
     // Text options
+    public String text = "$effect has expired!";
     public TextColor textColor = TextColor.fromFormatting(Formatting.RED);
     public boolean centeredText = false;
     public int textPosX = 10;

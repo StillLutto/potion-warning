@@ -39,13 +39,19 @@ public class ModMenuIntegration implements ModMenuApi {
 
             // Text subcategory
             ConfigCategory textCategory = builder.getOrCreateCategory(Text.of("Text Options"));
+            textCategory.addEntry(entryBuilder.startStrField(Text.of("Text"), config.text)
+                    .setDefaultValue("$effect has expired!")
+                    .setTooltip(Text.of("Change the displayed text. $effect displays the effect"))
+                    .setSaveConsumer(newValue -> config.text = newValue)
+                    .build());
+
             textCategory.addEntry(entryBuilder.startColorField(Text.of("Text Color"), config.textColor)
                     .setDefaultValue(TextColor.fromFormatting(Formatting.RED))
                     .setTooltip(Text.of("Select the text color"))
                     .setSaveConsumer3(newValue -> config.textColor = newValue)
                     .build());
 
-            textCategory.addEntry(entryBuilder.startBooleanToggle(Text.of("Text Color"), config.centeredText)
+            textCategory.addEntry(entryBuilder.startBooleanToggle(Text.of("Centered Text"), config.centeredText)
                     .setDefaultValue(false)
                     .setTooltip(Text.of("Toggle centered text"))
                     .setSaveConsumer(newValue -> config.centeredText = newValue)
