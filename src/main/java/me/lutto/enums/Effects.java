@@ -10,7 +10,7 @@ public enum Effects {
     SLOWNESS(StatusEffects.SLOWNESS, PotionWarning.getConfigManager().getConfig().SLOWNESS),
     HASTE(StatusEffects.HASTE, PotionWarning.getConfigManager().getConfig().HASTE),
     MINING_FATIGUE(StatusEffects.MINING_FATIGUE, PotionWarning.getConfigManager().getConfig().MINING_FATIGUE),
-    STRENGTH(StatusEffects.MINING_FATIGUE, PotionWarning.getConfigManager().getConfig().STRENGTH),
+    STRENGTH(StatusEffects.STRENGTH, PotionWarning.getConfigManager().getConfig().STRENGTH),
     INSTANT_HEALTH(StatusEffects.INSTANT_HEALTH, PotionWarning.getConfigManager().getConfig().INSTANT_HEALTH),
     INSTANT_DAMAGE(StatusEffects.INSTANT_DAMAGE, PotionWarning.getConfigManager().getConfig().INSTANT_DAMAGE),
     JUMP_BOOST(StatusEffects.JUMP_BOOST, PotionWarning.getConfigManager().getConfig().JUMP_BOOST),
