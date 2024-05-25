@@ -11,8 +11,8 @@ public class Config {
     public String text = "$effect has expired!";
     public TextColor textColor = TextColor.fromFormatting(Formatting.RED);
     public boolean centeredText = false;
-    public int textPosX = 10;
-    public int textPosY = 10;
+    public int textPosX = 2;
+    public int textPosY = 2;
 
     // Effect options
     public boolean SPEED = true;

@@ -58,13 +58,13 @@ public class ModMenuIntegration implements ModMenuApi {
                     .build());
 
             textCategory.addEntry(entryBuilder.startIntSlider(Text.of("Text Position X"), config.textPosX, 1, 100)
-                    .setDefaultValue(10)
+                    .setDefaultValue(2)
                     .setTooltip(Text.of("Select the text x position"))
                     .setSaveConsumer(newValue -> config.textPosX = newValue)
                     .build());
 
             textCategory.addEntry(entryBuilder.startIntSlider(Text.of("Text Position Y"), config.textPosY, 1, 100)
-                    .setDefaultValue(10)
+                    .setDefaultValue(2)
                     .setTooltip(Text.of("Select the text y position"))
                     .setSaveConsumer(newValue -> config.textPosY = newValue)
                     .build());
