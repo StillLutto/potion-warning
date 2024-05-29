@@ -21,10 +21,7 @@ public class ConfigManager {
 
     private PotionWarningConfig config;
 
-    public void loadConfig() {
-        AutoConfig.register(PotionWarningConfig.class, GsonConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(PotionWarningConfig.class).getConfig();
-
+    private void registerAnnotations() {
         GuiRegistry registry = AutoConfig.getGuiRegistry(PotionWarningConfig.class);
 
         registry.registerAnnotationProvider(
@@ -55,12 +52,18 @@ public class ConfigManager {
         );
     }
 
+    public void loadConfig() {
+        AutoConfig.register(PotionWarningConfig.class, GsonConfigSerializer::new);
+        config = AutoConfig.getConfigHolder(PotionWarningConfig.class).getConfig();
+        registerAnnotations();
+    }
+
     public void setStatusEffect(Identifier id, boolean value) {
-        if (!value) {
+        if (value) {
+            config.disabledStatusEffects.remove(id);
+        } else {
             config.disabledStatusEffects.add(id);
-            return;
         }
-        config.disabledStatusEffects.remove(id);
     }
 
     public boolean isDisabled(Identifier id) {

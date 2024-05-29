@@ -20,14 +20,18 @@ public class PotionWarningConfig implements ConfigData {
     // Text options
     @ConfigEntry.Category("text")
     public String text = "$effect has expired!";
+
     @ConfigEntry.Category("text")
     @ConfigEntry.ColorPicker
     public int textColor = TextColor.fromFormatting(Formatting.RED).getRgb();
+
     @ConfigEntry.Category("text")
     public boolean centeredText = false;
+
     @ConfigEntry.Category("text")
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int textPosX = 2;
+
     @ConfigEntry.Category("text")
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int textPosY = 2;
