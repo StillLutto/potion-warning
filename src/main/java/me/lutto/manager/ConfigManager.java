@@ -1,47 +1,70 @@
 package me.lutto.manager;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import me.lutto.PotionWarning;
-import me.lutto.enums.Effects;
-import me.lutto.instance.Config;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.entity.effect.StatusEffect;
+import me.lutto.annotations.StatusEffects;
+import me.lutto.instance.PotionWarningConfig;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.gui.registry.GuiRegistry;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 
-import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import static me.shedaniel.autoconfig.util.Utils.getUnsafely;
 
 public class ConfigManager {
-    private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "potion-warning-config.json");
-    private Config config;
+    private static final ConfigEntryBuilder ENTRY_BUILDER = ConfigEntryBuilder.create();
+
+    private PotionWarningConfig config;
 
     public void loadConfig() {
-        try (Reader reader = new FileReader(CONFIG_FILE)) {
-            config = GSON.fromJson(reader, Config.class);
-        } catch (IOException e) {
-            config = new Config();
-        }
+        AutoConfig.register(PotionWarningConfig.class, GsonConfigSerializer::new);
+        config = AutoConfig.getConfigHolder(PotionWarningConfig.class).getConfig();
+
+        GuiRegistry registry = AutoConfig.getGuiRegistry(PotionWarningConfig.class);
+
+        registry.registerAnnotationProvider(
+                (i18n, field, registryConfig, defaults, guiProvider) -> {
+                    Set<Identifier> value = getUnsafely(field, registryConfig);
+                    List<Identifier> statusEffects = new ArrayList<>();
+                    for (Identifier statusEffectId : Registries.STATUS_EFFECT.getIds()) {
+                        for (Identifier id : value) {
+                            if (statusEffectId == id) continue;
+                            statusEffects.add(id);
+                        }
+                    }
+
+                    List<AbstractConfigListEntry> collection = new ArrayList<>();
+                    for (Identifier id : Registries.STATUS_EFFECT.getIds()) {
+                        collection.add(
+                                ENTRY_BUILDER.startBooleanToggle(Registries.STATUS_EFFECT.get(id).getName(), !statusEffects.contains(id))
+                                        .setDefaultValue(true)
+                                        .setSaveConsumer(newValue -> setStatusEffect(id, newValue))
+                                        .build()
+                        );
+                    }
+
+                    return collection;
+                },
+                field -> field.getType() == Set.class,
+                StatusEffects.class
+        );
     }
 
-    public void saveConfig() {
-        PotionWarning.getLogger().debug("Saving config...");
-        try (Writer writer = new FileWriter(CONFIG_FILE)) {
-            GSON.toJson(config, writer);
-        } catch (IOException e) {
-            PotionWarning.getLogger().error("Could not save config to file '" + CONFIG_FILE.getAbsolutePath() + "'", e);
+    public void setStatusEffect(Identifier id, boolean value) {
+        if (!value) {
+            config.disabledStatusEffects.add(id);
+            return;
         }
+        config.disabledStatusEffects.remove(id);
     }
 
-    public Effects getEffectEnum(StatusEffect statusEffect) {
-        for (Effects effect : Effects.values()) {
-            if (effect.getStatusEffect() != statusEffect) continue;
-            return effect;
-        }
-        return null;
-    }
-
-    public Config getConfig() {
-        return config;
+    public boolean isDisabled(Identifier id) {
+        return config.disabledStatusEffects.contains(id);
     }
 }
 
