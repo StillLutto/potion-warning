@@ -1,6 +1,6 @@
 package me.lutto.client;
 
-import me.lutto.instance.PotionWarningConfig;
+import me.lutto.config.PotionWarningConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;

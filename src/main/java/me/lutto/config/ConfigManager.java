@@ -1,7 +1,7 @@
-package me.lutto.manager;
+package me.lutto.config;
 
 import me.lutto.annotations.StatusEffects;
-import me.lutto.instance.PotionWarningConfig;
+import me.lutto.config.PotionWarningConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.gui.registry.GuiRegistry;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;

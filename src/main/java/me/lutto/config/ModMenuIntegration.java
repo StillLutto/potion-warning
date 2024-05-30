@@ -1,8 +1,8 @@
-package me.lutto.modmenu;
+package me.lutto.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import me.lutto.instance.PotionWarningConfig;
+import me.lutto.config.PotionWarningConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,4 +1,4 @@
-package me.lutto.instance;
+package me.lutto.config;
 
 import me.lutto.annotations.StatusEffects;
 import me.shedaniel.autoconfig.ConfigData;

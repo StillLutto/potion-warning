@@ -1,6 +1,6 @@
 package me.lutto;
 
-import me.lutto.manager.ConfigManager;
+import me.lutto.config.ConfigManager;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
