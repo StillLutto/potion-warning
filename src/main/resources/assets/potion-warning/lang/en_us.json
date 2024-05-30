@@ -5,6 +5,7 @@
   "text.autoconfig.potion-warning.category.status-effects" : "Status Effects",
   "text.autoconfig.potion-warning.option.enabled" : "Enabled",
   "text.autoconfig.potion-warning.option.text" : "Text Content",
+  "text.autoconfig.potion-warning.option.textScale" : "Text Scale (in %)",
   "text.autoconfig.potion-warning.option.textColor" : "Text Color",
   "text.autoconfig.potion-warning.option.textPosX" : "Text Position X",
   "text.autoconfig.potion-warning.option.textPosY" : "Text Position Y",

@@ -6,26 +6,35 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class StatusEffectHudOverlay implements HudRenderCallback {
 
-    private void drawText(DrawContext drawContext, TextRenderer textRenderer, String text, int x, int y, int color, boolean shadow, boolean centeredText) {
+    private void drawText(DrawContext drawContext, String text, float scale, int x, int y, int color, boolean shadow, boolean centeredText) {
+        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+        MatrixStack matrices = drawContext.getMatrices();
+
+        matrices.push();
+        matrices.scale(scale, scale, scale);
+
         if (centeredText) {
             x = x - textRenderer.getWidth(text) / 2;
         }
 
-        textRenderer.draw(text,
+        textRenderer.draw(
+                text,
                 x,
                 y,
                 color,
                 shadow,
-                drawContext.getMatrices().peek().getPositionMatrix(),
+                matrices.peek().getPositionMatrix(),
                 drawContext.getVertexConsumers(),
                 TextRenderer.TextLayerType.NORMAL,
                 0,
                 15728880,
                 textRenderer.isRightToLeft());
+
+        matrices.pop();
     }
 
     @Override
@@ -36,16 +45,17 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
         if (PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect() == null) return;
 
         String text = config.text.replace("$effect", PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString());
+        float scale = (float) config.textScale / 100;
         int x = (int) (drawContext.getScaledWindowWidth() * ((double) config.textPosX / 100));
         int y = (int) (drawContext.getScaledWindowHeight() * ((double) config.textPosY / 100));
         int color = config.textColor;
         boolean shadow = config.textShadow;
         boolean centeredText = config.centeredText;
 
-        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        drawText(drawContext,
-                textRenderer,
+        drawText(
+                drawContext,
                 text,
+                scale,
                 x,
                 y,
                 color,

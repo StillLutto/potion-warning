@@ -26,6 +26,10 @@ public class PotionWarningConfig implements ConfigData {
     public int textColor = TextColor.fromFormatting(Formatting.RED).getRgb();
 
     @ConfigEntry.Category("text")
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 250)
+    public int textScale = 100;
+
+    @ConfigEntry.Category("text")
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int textPosX = 2;
 
