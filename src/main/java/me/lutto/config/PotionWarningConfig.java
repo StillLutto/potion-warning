@@ -17,6 +17,9 @@ public class PotionWarningConfig implements ConfigData {
     @ConfigEntry.Category("general")
     public boolean enabled = true;
 
+    @ConfigEntry.Category("general")
+    public int warnTime = 0;
+
     // Text options
     @ConfigEntry.Category("text")
     public String text = "$effect has expired!";

@@ -4,6 +4,7 @@
   "text.autoconfig.potion-warning.category.text" : "Text Options",
   "text.autoconfig.potion-warning.category.status-effects" : "Status Effects",
   "text.autoconfig.potion-warning.option.enabled" : "Enabled",
+  "text.autoconfig.potion-warning.option.warnTime" : "When you get warned",
   "text.autoconfig.potion-warning.option.text" : "Text Content",
   "text.autoconfig.potion-warning.option.textScale" : "Text Scale (in %)",
   "text.autoconfig.potion-warning.option.textColor" : "Text Color",
