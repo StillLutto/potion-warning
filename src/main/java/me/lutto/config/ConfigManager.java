@@ -29,6 +29,8 @@ public class ConfigManager {
                     Set<Identifier> value = getUnsafely(field, registryConfig);
                     List<Identifier> statusEffects = new ArrayList<>();
                     for (Identifier statusEffectId : Registries.STATUS_EFFECT.getIds()) {
+                        if (Registries.STATUS_EFFECT.get(statusEffectId).isInstant()) continue;
+
                         for (Identifier id : value) {
                             if (statusEffectId == id) continue;
                             statusEffects.add(id);
@@ -37,6 +39,8 @@ public class ConfigManager {
 
                     List<AbstractConfigListEntry> collection = new ArrayList<>();
                     for (Identifier id : Registries.STATUS_EFFECT.getIds()) {
+                        if (Registries.STATUS_EFFECT.get(id).isInstant()) continue;
+
                         collection.add(
                                 ENTRY_BUILDER.startBooleanToggle(Registries.STATUS_EFFECT.get(id).getName(), !statusEffects.contains(id))
                                         .setDefaultValue(true)
