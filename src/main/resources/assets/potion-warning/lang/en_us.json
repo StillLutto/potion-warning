@@ -6,7 +6,8 @@
   "text.autoconfig.potion-warning.option.enabled" : "Enabled",
   "text.autoconfig.potion-warning.option.text" : "Text Content",
   "text.autoconfig.potion-warning.option.textColor" : "Text Color",
-  "text.autoconfig.potion-warning.option.centeredText" : "Centered Text",
   "text.autoconfig.potion-warning.option.textPosX" : "Text Position X",
-  "text.autoconfig.potion-warning.option.textPosY" : "Text Position Y"
+  "text.autoconfig.potion-warning.option.textPosY" : "Text Position Y",
+  "text.autoconfig.potion-warning.option.centeredText" : "Centered Text",
+  "text.autoconfig.potion-warning.option.textShadow" : "Text Shadow"
 }

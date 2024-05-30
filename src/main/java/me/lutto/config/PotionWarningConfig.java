@@ -26,15 +26,18 @@ public class PotionWarningConfig implements ConfigData {
     public int textColor = TextColor.fromFormatting(Formatting.RED).getRgb();
 
     @ConfigEntry.Category("text")
-    public boolean centeredText = false;
-
-    @ConfigEntry.Category("text")
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int textPosX = 2;
 
     @ConfigEntry.Category("text")
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int textPosY = 2;
+
+    @ConfigEntry.Category("text")
+    public boolean centeredText = false;
+
+    @ConfigEntry.Category("text")
+    public boolean textShadow = true;
 
     // Status Effects
     @ConfigEntry.Category("status-effects")
