@@ -1,53 +1,73 @@
 package me.lutto.config;
 
-import me.lutto.annotations.StatusEffects;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import eu.midnightdust.lib.config.MidnightConfig;
+import me.lutto.PotionWarning;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
-import java.util.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
-@Config(name = "potion-warning")
-public class PotionWarningConfig implements ConfigData {
+public class PotionWarningConfig extends MidnightConfig {
 
     // General options
-    @ConfigEntry.Category("general")
-    public boolean enabled = true;
-
-    @ConfigEntry.Category("general")
-    public int warnTime = 0;
+    public static boolean enabled = true;
+    public static int warnTime = 0;
 
     // Text options
-    @ConfigEntry.Category("text")
-    public String text = "$effect has expired!";
+    public static String text = "$effect has expired!";
+    public static String textColor = TextColor.fromFormatting(Formatting.RED).getHexCode();
+    public static double textScale = 100;
+    public static double textPosX = 2;
+    public static double textPosY = 2;
+    public static boolean centeredText = false;
+    public static boolean textShadow = true;
 
-    @ConfigEntry.Category("text")
-    @ConfigEntry.ColorPicker
-    public int textColor = TextColor.fromFormatting(Formatting.RED).getRgb();
+    // Status effects
+    public static Map<Identifier, Boolean> statusEffects = new HashMap<>();
 
-    @ConfigEntry.Category("text")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 250)
-    public int textScale = 100;
+    public static void save() {
+        Properties properties = new Properties();
+        writeTo(properties);
+        Path configPath = FabricLoader.getInstance().getConfigDir().resolve("potion-warning.properties");
+        if(!Files.exists(configPath)) {
+            try {
+                Files.createFile(configPath);
+            } catch (IOException e) {
+                PotionWarning.getLogger().error("Failed to create configuration file!");
+                e.printStackTrace();
+                return;
+            }
+        }
+        try {
+            properties.store(Files.newOutputStream(configPath), "Configuration file for Enhanced Block Entities");
+        } catch (IOException e) {
+            PotionWarning.getLogger().error("Failed to write to configuration file!");
+            e.printStackTrace();
+        }
+    }
 
-    @ConfigEntry.Category("text")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
-    public int textPosX = 2;
+    public static void writeTo(Properties properties) {
+        properties.setProperty("enabled", Boolean.toString(enabled));
+        properties.setProperty("warnTime", Integer.toString(warnTime));
 
-    @ConfigEntry.Category("text")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
-    public int textPosY = 2;
+        properties.setProperty("text", text);
+        properties.setProperty("textColor", textColor);
+        properties.setProperty("textScale", Double.toString(textScale));
+        properties.setProperty("textPosX", Double.toString(textPosX));
+        properties.setProperty("textPosY", Double.toString(textPosY));
+        properties.setProperty("textPosY", Boolean.toString(centeredText));
+        properties.setProperty("textPosY", Boolean.toString(textShadow));
 
-    @ConfigEntry.Category("text")
-    public boolean centeredText = false;
+        for (Identifier id : statusEffects.keySet()) {
+            properties.setProperty(id.getPath(), Boolean.toString(textShadow));
+        }
+    }
 
-    @ConfigEntry.Category("text")
-    public boolean textShadow = true;
-
-    // Status Effects
-    @ConfigEntry.Category("status-effects")
-    @StatusEffects
-    public Set<Identifier> disabledStatusEffects = new HashSet<>();
 }

@@ -3,7 +3,6 @@ package me.lutto.mixin;
 import me.lutto.PotionWarning;
 import me.lutto.client.PotionWarningClient;
 import me.lutto.config.PotionWarningConfig;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -27,14 +26,14 @@ public class StatusEffectInstanceMixin {
 
     @Inject(at = @At("TAIL"), method = "update")
     private void injectUpdate(LivingEntity entity, Runnable overwriteCallback, CallbackInfoReturnable<Boolean> cir) {
-        if (duration != AutoConfig.getConfigHolder(PotionWarningConfig.class).getConfig().warnTime) return;
+        if (duration != PotionWarningConfig.warnTime) return;
 
         if (!(entity instanceof PlayerEntity)) return;
         PlayerEntity thisEntity = (PlayerEntity) entity;
         PlayerEntity localPlayer = MinecraftClient.getInstance().player;
         if (!thisEntity.equals(localPlayer)) return;
 
-        if (PotionWarning.getConfigManager().isDisabled(Registries.STATUS_EFFECT.getId(type))) return;
+        if (!PotionWarningConfig.statusEffects.get(Registries.STATUS_EFFECT.getId(type))) return;
 
         PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(type);
     }

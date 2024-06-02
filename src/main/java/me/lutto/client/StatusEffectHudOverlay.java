@@ -1,12 +1,13 @@
 package me.lutto.client;
 
 import me.lutto.config.PotionWarningConfig;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
+
+import java.awt.*;
 
 public class StatusEffectHudOverlay implements HudRenderCallback {
 
@@ -39,18 +40,16 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
 
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {
-        PotionWarningConfig config = AutoConfig.getConfigHolder(PotionWarningConfig.class).getConfig();
-
-        if (!config.enabled) return;
+        if (!PotionWarningConfig.enabled) return;
         if (PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect() == null) return;
 
-        String text = config.text.replace("$effect", PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString());
-        float scale = (float) config.textScale / 100;
-        int x = (int) (drawContext.getScaledWindowWidth() * ((double) config.textPosX / 100));
-        int y = (int) (drawContext.getScaledWindowHeight() * ((double) config.textPosY / 100));
-        int color = config.textColor;
-        boolean shadow = config.textShadow;
-        boolean centeredText = config.centeredText;
+        String text = PotionWarningConfig.text.replace("$effect", PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString());
+        float scale = (float) PotionWarningConfig.textScale / 100;
+        int x = (int) (drawContext.getScaledWindowWidth() * (PotionWarningConfig.textPosX / 100));
+        int y = (int) (drawContext.getScaledWindowHeight() * (PotionWarningConfig.textPosY / 100));
+        int color = Color.decode(PotionWarningConfig.textColor).getRGB();
+        boolean shadow = PotionWarningConfig.textShadow;
+        boolean centeredText = PotionWarningConfig.centeredText;
 
         drawText(
                 drawContext,
