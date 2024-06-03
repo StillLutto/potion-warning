@@ -1,0 +1,23 @@
+{
+  "potionwarning.title" : "Potion Warning Config",
+  "potionwarning.category.general" : "General",
+  "potionwarning.category.text" : "Text Options",
+  "potionwarning.category.status-effects" : "Status Effects",
+  "potionwarning.option.enabled" : "Enabled",
+  "potionwarning.option.enabled.tooltip" : "Enabled/Disable this mod",
+  "potionwarning.option.warn-time" : "Choose when you get warned (in ticks)",
+  "potionwarning.option.warn-time.tooltip" : "Time before effect runs out",
+  "potionwarning.option.text" : "Text Content",
+  "potionwarning.option.text.tooltip" : "Modify the displayed text",
+  "potionwarning.option.textColor" : "Text Color",
+  "potionwarning.option.textScale" : "Text Scale (in %)",
+  "potionwarning.option.textScale.tooltip" : "Change the size of the text in %",
+  "potionwarning.option.textPosX" : "Text Position X",
+  "potionwarning.option.textPosX.tooltip" : "Change the text position around the x axis",
+  "potionwarning.option.textPosY" : "Text Position Y",
+  "potionwarning.option.textPosY.tooltip" : "Change the text position around the y axis",
+  "potionwarning.option.centeredText" : "Centered Text",
+  "potionwarning.option.centeredText.tooltip" : "Make the text centered around its position",
+  "potionwarning.option.textShadow" : "Text Shadow",
+  "potionwarning.option.textShadow.tooltip" : "Enabled/disable text shadow"
+}

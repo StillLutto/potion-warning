@@ -21,6 +21,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 
+import static me.lutto.PotionWarning.MOD_ID;
 import static net.minecraft.client.util.InputUtil.GLFW_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_NORMAL;
 import static org.lwjgl.glfw.GLFW.glfwSetInputMode;
@@ -28,7 +29,7 @@ import static org.lwjgl.glfw.GLFW.glfwSetInputMode;
 
 public class PotionWarningScreen extends SpruceScreen {
 
-    private static final Identifier CURSOR = new Identifier("potion-warning",
+    private static final Identifier CURSOR = new Identifier("potionwarning",
             "textures/cursor.png");
 
     private final Screen parent;
@@ -52,53 +53,53 @@ public class PotionWarningScreen extends SpruceScreen {
     private final RotatingCubeMapRenderer background = new RotatingCubeMapRenderer(TitleScreen.PANORAMA_CUBE_MAP);
 
     public PotionWarningScreen(Screen parent) {
-        super(Text.translatable("potion-warning.title"));
+        super(Text.translatable(MOD_ID + ".title"));
         this.parent = parent;
 
         // General options
-        this.generalSeparator = new SpruceSeparatorOption("potion-warning.category.general", true, null);
-        this.enabled = new SpruceToggleBooleanOption("potion-warning.option.enabled",
+        this.generalSeparator = new SpruceSeparatorOption(MOD_ID + ".category.general", true, null);
+        this.enabled = new SpruceToggleBooleanOption(MOD_ID + ".option.enabled",
                 () -> PotionWarningConfig.enabled,
                 value -> PotionWarningConfig.enabled = value,
-                Text.translatable("potion-warning.option.enabled.tooltip"));
-        this.warnTime = new SpruceIntegerInputOption("potion-warning.option.warn-time",
+                Text.translatable(MOD_ID + ".option.enabled.tooltip"));
+        this.warnTime = new SpruceIntegerInputOption(MOD_ID + ".option.warn-time",
                 () -> PotionWarningConfig.warnTime,
                 value -> PotionWarningConfig.warnTime = value,
-                Text.translatable("potion-warning.option.enabled.tooltip"));
+                Text.translatable(MOD_ID + ".option.warn-time.tooltip"));
 
         // Text options
-        this.textSeparator = new SpruceSeparatorOption("potion-warning.category.text", true, null);
-        this.text = new SpruceStringOption("potion-warning.option.text",
+        this.textSeparator = new SpruceSeparatorOption(MOD_ID + ".category.text", true, null);
+        this.text = new SpruceStringOption(MOD_ID + ".option.text",
                 () -> PotionWarningConfig.text,
                 value -> PotionWarningConfig.text = value,
                 string -> !string.isEmpty(),
-                Text.translatable("potion-warning.option.text.tooltip"));
-        this.textColor = new SpruceColorOption("potion-warning.option.textColor",
+                Text.translatable(MOD_ID + ".option.text.tooltip"));
+        this.textColor = new SpruceColorOption(MOD_ID + ".option.textColor",
                 () -> PotionWarningConfig.textColor,
                 value -> PotionWarningConfig.textColor = value);
-        this.textScale = new SpruceDoubleOption("potion-warning.option.textScale", 0, 250, 1,
+        this.textScale = new SpruceDoubleOption(MOD_ID + ".option.textScale", 0, 250, 1,
                 () -> PotionWarningConfig.textScale,
                 value -> PotionWarningConfig.textScale = value, option -> option.getDisplayText(Text.literal(String.valueOf(option.get()))),
-                Text.translatable("potion-warning.option.textScale.tooltip"));
-        this.textPosX = new SpruceDoubleOption("potion-warning.option.textPosX", 0, 100, 1,
+                Text.translatable(MOD_ID + ".option.textScale.tooltip"));
+        this.textPosX = new SpruceDoubleOption(MOD_ID + ".option.textPosX", 0, 100, 1,
                 () -> PotionWarningConfig.textPosX,
                 value -> PotionWarningConfig.textPosX = value,
                 option -> option.getDisplayText(Text.literal(String.valueOf(option.get()))),
-                Text.translatable("potion-warning.option.textPosX.tooltip"));
-        this.textPosY = new SpruceDoubleOption("potion-warning.option.textPosY", 0, 100, 1,
+                Text.translatable(MOD_ID + ".option.textPosX.tooltip"));
+        this.textPosY = new SpruceDoubleOption(MOD_ID + ".option.textPosY", 0, 100, 1,
                 () -> PotionWarningConfig.textPosY,
                 value -> PotionWarningConfig.textPosY = value,
                 option -> option.getDisplayText(Text.literal(String.valueOf(option.get()))),
-                Text.translatable("potion-warning.option.textPosY.tooltip"));
-        this.centeredText = new SpruceBooleanOption("potion-warning.option.centeredText",
+                Text.translatable(MOD_ID + ".option.textPosY.tooltip"));
+        this.centeredText = new SpruceBooleanOption(MOD_ID + ".option.centeredText",
                 () -> PotionWarningConfig.centeredText,
                 value -> PotionWarningConfig.centeredText = value,
-                Text.translatable("potion-warning.option.centeredText.tooltip"),
+                Text.translatable(MOD_ID + ".option.centeredText.tooltip"),
                 true);
-        this.textShadow = new SpruceBooleanOption("potion-warning.option.textShadow",
+        this.textShadow = new SpruceBooleanOption(MOD_ID + ".option.textShadow",
                 () -> PotionWarningConfig.textShadow,
                 value -> PotionWarningConfig.textShadow = value,
-                Text.translatable("potion-warning.option.textShadow.tooltip"),
+                Text.translatable(MOD_ID + ".option.textShadow.tooltip"),
                 true);
 
         // Status effects options
@@ -163,10 +164,10 @@ public class PotionWarningScreen extends SpruceScreen {
         tabs.getList().setBackground(new DirtTexturedBackground(48, 48, 48, 255));
         this.addDrawableChild(tabs);
 
-        tabs.addSeparatorEntry(Text.translatable("potion-warning.category.general"));
-        tabs.addTabEntry(Text.translatable("potion-warning.category.general"), null,
+        tabs.addSeparatorEntry(Text.translatable(MOD_ID + ".category.general"));
+        tabs.addTabEntry(Text.translatable(MOD_ID + ".category.general"), null,
                 this::buildGeneralTab);
-        tabs.addTabEntry(Text.translatable("potion-warning.category.status-effects"), null,
+        tabs.addTabEntry(Text.translatable(MOD_ID + ".category.status-effects"), null,
                 this::buildStatusEffectsTab);
     }
 

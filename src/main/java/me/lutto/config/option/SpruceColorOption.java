@@ -19,6 +19,8 @@ import java.util.regex.Pattern;
 
 import dev.lambdaurora.spruceui.widget.SpruceButtonWidget;
 
+import static me.lutto.PotionWarning.LOGGER;
+
 public class SpruceColorOption extends SpruceOption {
 
     private final Supplier<String> getter;
@@ -54,7 +56,7 @@ public class SpruceColorOption extends SpruceOption {
                 try {
                     preview.setMessage(Text.literal("⬛").setStyle(Style.EMPTY.withColor(Color.decode(value).getRGB())));
                 } catch (NumberFormatException e) {
-                    PotionWarning.getLogger().warn("Not a hex color!");
+                    LOGGER.warn("Not a hex color!");
                     return;
                 }
                 setter.accept(value);

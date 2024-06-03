@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "potion-warning",
+  "id": "potionwarning",
   "version": "${version}",
   "name": "PotionWarning",
   "description": "This mod warns you if a certain potion effect has run out.",
@@ -15,7 +15,7 @@
     "issues": "https://github.com/StillLutto/issues"
   },
   "license": "MIT",
-  "icon": "assets/potion-warning/icon.png",
+  "icon": "assets/potionwarning/icon.png",
 
   "environment": "client",
   "entrypoints": {
@@ -31,7 +31,7 @@
   },
 
   "mixins": [
-    "potion-warning.mixins.json"
+    "potionwarning.mixins.json"
     ],
 
   "depends": {

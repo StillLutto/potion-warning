@@ -2,9 +2,7 @@ package me.lutto.config;
 
 import com.google.gson.*;
 import eu.midnightdust.lib.config.MidnightConfig;
-import me.lutto.PotionWarning;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.registry.Registries;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -17,9 +15,12 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
+import static me.lutto.PotionWarning.LOGGER;
+import static me.lutto.PotionWarning.MOD_ID;
+
 public class PotionWarningConfig extends MidnightConfig {
 
-    private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve("potion-warning.json");
+    private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve(MOD_ID + ".json");
 
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
@@ -97,7 +98,7 @@ public class PotionWarningConfig extends MidnightConfig {
         try (BufferedWriter fileWriter = Files.newBufferedWriter(PATH)) {
             fileWriter.write(GSON.toJson(jsonConfig));
         } catch (IOException e) {
-            PotionWarning.getLogger().error("Couldn't save Potion Warning configuration file");
+            LOGGER.error("Couldn't save Potion Warning configuration file");
             e.printStackTrace();
         }
     }
