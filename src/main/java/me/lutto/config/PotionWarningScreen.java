@@ -136,7 +136,7 @@ public class PotionWarningScreen extends SpruceScreen {
 
         super.render(context, mouseX, mouseY, delta);
 
-        context.drawTexture(CURSOR, mouseX, mouseY, 16, 16, 16, 16, 16, 16);
+        context.drawTexture(CURSOR, mouseX - 4, mouseY- 4, 16, 16, 16, 16, 16, 16);
     }
 
     @Override
