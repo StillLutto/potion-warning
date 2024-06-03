@@ -1,5 +1,6 @@
 package me.lutto;
 
+import me.lutto.config.PotionWarningConfig;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +11,7 @@ public class PotionWarning implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        // Code here
+        PotionWarningConfig.load();
     }
 
     public static Logger getLogger() {
