@@ -15,6 +15,7 @@ import net.minecraft.text.Text;
 import java.awt.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 
 import dev.lambdaurora.spruceui.widget.SpruceButtonWidget;
 
@@ -22,6 +23,8 @@ public class SpruceColorOption extends SpruceOption {
 
     private final Supplier<String> getter;
     private final Consumer<String> setter;
+
+    private final Pattern HEXADECIMAL_ONLY = Pattern.compile("(-?[#0-9a-fA-F]*)");
 
     public SpruceColorOption(String key, Supplier<String> getter, Consumer<String> setter) {
         super(key);
@@ -56,6 +59,8 @@ public class SpruceColorOption extends SpruceOption {
                 }
                 setter.accept(value);
             });
+
+            text.setTextPredicate(input -> HEXADECIMAL_ONLY.matcher(input).matches());
 
             widgetAdder.accept(text);
         });
