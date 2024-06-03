@@ -1,7 +1,6 @@
 package me.lutto.config;
 
 import com.google.gson.*;
-import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
@@ -18,7 +17,7 @@ import java.util.Map;
 import static me.lutto.PotionWarning.LOGGER;
 import static me.lutto.PotionWarning.MOD_ID;
 
-public class PotionWarningConfig extends MidnightConfig {
+public class PotionWarningConfig {
 
     private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve(MOD_ID + ".json");
 
@@ -65,8 +64,6 @@ public class PotionWarningConfig extends MidnightConfig {
             if (json.get("status-effects") == null) return;
             Map<String, JsonElement> statusEffectsMap = json.get("status-effects").getAsJsonObject().asMap();
             for (String id : statusEffectsMap.keySet()) {
-                System.out.println(Identifier.tryParse(id));
-                System.out.println(statusEffectsMap.get(id).getAsBoolean());
                 statusEffects.put(Identifier.tryParse(id), statusEffectsMap.get(id).getAsBoolean());
             }
             System.out.println(statusEffects);

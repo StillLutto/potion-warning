@@ -27,8 +27,6 @@ dependencies {
 
     // Other APIs
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
-    include "maven.modrinth:midnightlib:${project.midnightlib_version}"
     include modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}")
 }
 
