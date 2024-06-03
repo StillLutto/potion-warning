@@ -103,7 +103,8 @@ public class PotionWarningScreen extends SpruceScreen {
 
         // Status effects options
         for (Identifier id : Registries.STATUS_EFFECT.getIds()) {
-            if (PotionWarningConfig.statusEffects.containsKey(id)) return;
+            if (PotionWarningConfig.statusEffects.containsKey(id)) continue;
+            if (Registries.STATUS_EFFECT.get(id).isInstant()) continue;
             PotionWarningConfig.statusEffects.put(id, true);
         }
     }
