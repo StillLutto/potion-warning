@@ -41,7 +41,7 @@ public class SpruceColorOption extends SpruceOption {
                     width - 80);
             widgetAdder.accept(label);
 
-            var text = new SpruceTextFieldWidget(Position.of(0, 0), containerWidth - 30, containerHeight, Text.translatable(key));
+            var text = new SpruceTextFieldWidget(Position.of(0, 0), containerWidth - 25, containerHeight, Text.translatable(key));
             text.setText(getter.get());
 
             var preview = new SpruceButtonWidget(Position.of(containerWidth - 20, 0),
