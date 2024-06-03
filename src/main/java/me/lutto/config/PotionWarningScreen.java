@@ -114,7 +114,7 @@ public class PotionWarningScreen extends SpruceScreen {
         super.init();
         this.buildTabs();
 
-        this.addDrawableChild(this.enabled.createWidget(Position.of(this.width / 32, this.height - 29), 80));
+        this.addDrawableChild(this.enabled.createWidget(Position.of(10, this.height - 29), 80));
         this.addDrawableChild(new SpruceButtonWidget(Position.of(this, this.width / 2 - 100, this.height - 27), 200, 20, Text.literal("Done"),
                 btn -> this.saveChanges()));
     }
