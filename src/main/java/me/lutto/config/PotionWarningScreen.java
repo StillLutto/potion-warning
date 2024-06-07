@@ -9,7 +9,9 @@ import dev.lambdaurora.spruceui.util.RenderUtil;
 import dev.lambdaurora.spruceui.widget.SpruceButtonWidget;
 import dev.lambdaurora.spruceui.widget.container.SpruceOptionListWidget;
 import dev.lambdaurora.spruceui.widget.container.tabbed.SpruceTabbedWidget;
+import me.lutto.config.hud.HudConfigScreen;
 import me.lutto.config.option.SpruceColorOption;
+import me.lutto.config.option.SpruceScreenChangeOption;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.RotatingCubeMapRenderer;
@@ -23,8 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import static me.lutto.PotionWarning.MOD_ID;
 import static net.minecraft.client.util.InputUtil.GLFW_CURSOR;
-import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_NORMAL;
-import static org.lwjgl.glfw.GLFW.glfwSetInputMode;
+import static org.lwjgl.glfw.GLFW.*;
 
 
 public class PotionWarningScreen extends SpruceScreen {
@@ -44,9 +45,6 @@ public class PotionWarningScreen extends SpruceScreen {
     private final SpruceOption text;
     private final SpruceOption textColor;
     private final SpruceOption textScale;
-    private final SpruceOption textPosX;
-    private final SpruceOption textPosY;
-    private final SpruceOption centeredText;
     private final SpruceOption textShadow;
 
     // Misc stuff
@@ -81,21 +79,6 @@ public class PotionWarningScreen extends SpruceScreen {
                 () -> PotionWarningConfig.textScale,
                 value -> PotionWarningConfig.textScale = value, option -> option.getDisplayText(Text.literal(String.valueOf(option.get()))),
                 Text.translatable(MOD_ID + ".option.textScale.tooltip"));
-        this.textPosX = new SpruceDoubleOption(MOD_ID + ".option.textPosX", 0, 100, 1,
-                () -> PotionWarningConfig.textPosX,
-                value -> PotionWarningConfig.textPosX = value,
-                option -> option.getDisplayText(Text.literal(String.valueOf(option.get()))),
-                Text.translatable(MOD_ID + ".option.textPosX.tooltip"));
-        this.textPosY = new SpruceDoubleOption(MOD_ID + ".option.textPosY", 0, 100, 1,
-                () -> PotionWarningConfig.textPosY,
-                value -> PotionWarningConfig.textPosY = value,
-                option -> option.getDisplayText(Text.literal(String.valueOf(option.get()))),
-                Text.translatable(MOD_ID + ".option.textPosY.tooltip"));
-        this.centeredText = new SpruceBooleanOption(MOD_ID + ".option.centeredText",
-                () -> PotionWarningConfig.centeredText,
-                value -> PotionWarningConfig.centeredText = value,
-                Text.translatable(MOD_ID + ".option.centeredText.tooltip"),
-                true);
         this.textShadow = new SpruceBooleanOption(MOD_ID + ".option.textShadow",
                 () -> PotionWarningConfig.textShadow,
                 value -> PotionWarningConfig.textShadow = value,
@@ -104,8 +87,7 @@ public class PotionWarningScreen extends SpruceScreen {
 
         // Status effects options
         for (Identifier id : Registries.STATUS_EFFECT.getIds()) {
-            if (PotionWarningConfig.statusEffects.containsKey(id)) continue;
-            if (Registries.STATUS_EFFECT.get(id).isInstant()) continue;
+            if (PotionWarningConfig.statusEffects.containsKey(id) || Registries.STATUS_EFFECT.get(id).isInstant()) continue;
             PotionWarningConfig.statusEffects.put(id, true);
         }
     }
@@ -118,6 +100,13 @@ public class PotionWarningScreen extends SpruceScreen {
         this.addDrawableChild(this.enabled.createWidget(Position.of(10, this.height - 29), 80));
         this.addDrawableChild(new SpruceButtonWidget(Position.of(this, this.width / 2 - 100, this.height - 27), 200, 20, Text.literal("Done"),
                 btn -> this.saveChanges()));
+    }
+
+    @Override
+    public void close() {
+        super.close();
+        PotionWarningConfig.save();
+        glfwSetInputMode(MinecraftClient.getInstance().getWindow().getHandle(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
 
     @Override
@@ -181,9 +170,7 @@ public class PotionWarningScreen extends SpruceScreen {
         list.addSingleOptionEntry(this.text);
         list.addSingleOptionEntry(this.textColor);
         list.addSingleOptionEntry(this.textScale);
-        list.addSingleOptionEntry(this.textPosX);
-        list.addSingleOptionEntry(this.textPosY);
-        list.addSingleOptionEntry(this.centeredText);
+        list.addSingleOptionEntry(new SpruceScreenChangeOption(MOD_ID + ".option.hud-config-screen", new HudConfigScreen()));
         list.addSingleOptionEntry(this.textShadow);
         return list;
     }

@@ -35,7 +35,6 @@ public class PotionWarningConfig {
     public static double textScale = 100;
     public static double textPosX = 2;
     public static double textPosY = 2;
-    public static boolean centeredText = false;
     public static boolean textShadow = true;
 
     // Status effects
@@ -58,7 +57,6 @@ public class PotionWarningConfig {
             textScale = json.get("textScale").getAsInt();
             textPosX = json.get("textPosX").getAsInt();
             textPosY = json.get("textPosY").getAsInt();
-            centeredText = json.get("centeredText").getAsBoolean();
             textShadow = json.get("textShadow").getAsBoolean();
 
             if (json.get("status-effects") == null) return;
@@ -66,7 +64,6 @@ public class PotionWarningConfig {
             for (String id : statusEffectsMap.keySet()) {
                 statusEffects.put(Identifier.tryParse(id), statusEffectsMap.get(id).getAsBoolean());
             }
-            System.out.println(statusEffects);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -83,7 +80,6 @@ public class PotionWarningConfig {
         jsonConfig.addProperty("textScale", textScale);
         jsonConfig.addProperty("textPosX", textPosX);
         jsonConfig.addProperty("textPosY", textPosY);
-        jsonConfig.addProperty("centeredText", centeredText);
         jsonConfig.addProperty("textShadow", textShadow);
 
         JsonObject statusEffectsJsonArray = new JsonObject();

@@ -11,16 +11,12 @@ import java.awt.*;
 
 public class StatusEffectHudOverlay implements HudRenderCallback {
 
-    private void drawText(DrawContext drawContext, String text, float scale, int x, int y, int color, boolean shadow, boolean centeredText) {
+    private void drawText(DrawContext drawContext, String text, float scale, float x, float y, int color, boolean shadow) {
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         MatrixStack matrices = drawContext.getMatrices();
 
         matrices.push();
         matrices.scale(scale, scale, scale);
-
-        if (centeredText) {
-            x = x - textRenderer.getWidth(text) / 2;
-        }
 
         textRenderer.draw(
                 text,
@@ -45,11 +41,10 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
 
         String text = PotionWarningConfig.text.replace("$effect", PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect().getName().getString());
         float scale = (float) PotionWarningConfig.textScale / 100;
-        int x = (int) (drawContext.getScaledWindowWidth() * (PotionWarningConfig.textPosX / 100));
-        int y = (int) (drawContext.getScaledWindowHeight() * (PotionWarningConfig.textPosY / 100));
+        float x = (float) (drawContext.getScaledWindowWidth() * (PotionWarningConfig.textPosX / 100));
+        float y = (float) (drawContext.getScaledWindowHeight() * (PotionWarningConfig.textPosY / 100));
         int color = Color.decode(PotionWarningConfig.textColor).getRGB();
         boolean shadow = PotionWarningConfig.textShadow;
-        boolean centeredText = PotionWarningConfig.centeredText;
 
         drawText(
                 drawContext,
@@ -58,7 +53,6 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
                 x,
                 y,
                 color,
-                shadow,
-                centeredText);
+                shadow);
     }
 }

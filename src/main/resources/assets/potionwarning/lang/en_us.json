@@ -12,12 +12,7 @@
   "potionwarning.option.textColor" : "Text Color",
   "potionwarning.option.textScale" : "Text Scale (in %)",
   "potionwarning.option.textScale.tooltip" : "Change the size of the text in %",
-  "potionwarning.option.textPosX" : "Text Position X",
-  "potionwarning.option.textPosX.tooltip" : "Change the text position around the x axis",
-  "potionwarning.option.textPosY" : "Text Position Y",
-  "potionwarning.option.textPosY.tooltip" : "Change the text position around the y axis",
-  "potionwarning.option.centeredText" : "Centered Text",
-  "potionwarning.option.centeredText.tooltip" : "Make the text centered around its position",
+  "potionwarning.option.hud-config-screen" : "Change hud positioning",
   "potionwarning.option.textShadow" : "Text Shadow",
   "potionwarning.option.textShadow.tooltip" : "Enabled/disable text shadow"
 }
