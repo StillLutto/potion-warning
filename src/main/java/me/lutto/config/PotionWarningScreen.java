@@ -106,7 +106,6 @@ public class PotionWarningScreen extends SpruceScreen {
     public void close() {
         super.close();
         PotionWarningConfig.save();
-        glfwSetInputMode(MinecraftClient.getInstance().getWindow().getHandle(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
 
     @Override
