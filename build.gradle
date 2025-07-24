@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.11-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -13,7 +13,10 @@ base {
 repositories {
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven { url "https://api.modrinth.com/maven" }
-    maven { url "https://maven.gegy.dev" }
+    maven {
+        name = "Gegy"
+        url = "https://maven.gegy.dev/releases"
+    }
 }
 
 dependencies {
@@ -27,7 +30,7 @@ dependencies {
 
     // Other APIs
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    include modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}")
+    include(modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}"))
 }
 
 processResources {

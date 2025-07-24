@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
@@ -35,7 +36,7 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
     }
 
     @Override
-    public void onHudRender(DrawContext drawContext, float tickDelta) {
+    public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         if (!PotionWarningConfig.enabled) return;
         if (PotionWarningClient.getStatusEffectHudManager().getShowHudStatusEffect() == null) return;
 
@@ -55,4 +56,5 @@ public class StatusEffectHudOverlay implements HudRenderCallback {
                 color,
                 shadow);
     }
+
 }

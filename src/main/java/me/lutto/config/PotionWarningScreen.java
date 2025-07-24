@@ -30,8 +30,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class PotionWarningScreen extends SpruceScreen {
 
-    private static final Identifier CURSOR = new Identifier("potionwarning",
-            "textures/cursor.png");
+    private static final Identifier CURSOR = Identifier.of("potionwarning", "textures/cursor.png");
 
     private final Screen parent;
 
@@ -48,7 +47,7 @@ public class PotionWarningScreen extends SpruceScreen {
     private final SpruceOption textShadow;
 
     // Misc stuff
-    private final RotatingCubeMapRenderer background = new RotatingCubeMapRenderer(TitleScreen.PANORAMA_CUBE_MAP);
+    private final RotatingCubeMapRenderer background = TitleScreen.ROTATING_PANORAMA_RENDERER;
 
     public PotionWarningScreen(Screen parent) {
         super(Text.translatable(MOD_ID + ".title"));
@@ -109,13 +108,9 @@ public class PotionWarningScreen extends SpruceScreen {
     }
 
     @Override
-    public void renderBackgroundTexture(DrawContext context) {
-    }
-
-    @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         if (this.client.world == null) {
-            this.background.render(delta, 1);
+            this.background.render(context, 1, 1, 1.0F, 1.0F);
             RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         }
 

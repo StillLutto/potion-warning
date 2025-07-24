@@ -120,10 +120,6 @@ public class HudConfigScreen extends SpruceScreen {
     }
 
     @Override
-    public void renderBackgroundTexture(DrawContext context) {
-    }
-
-    @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
         if (mouseX < 0 || mouseX > this.width) return false;
         if (mouseY < 0 || mouseY > this.height) return false;

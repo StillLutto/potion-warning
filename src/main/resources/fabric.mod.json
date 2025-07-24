@@ -40,7 +40,7 @@
     "minecraft": "${minecraft_version}"
   },
   "suggests": {
-    "modmenu": ">=7.0.1",
+    "modmenu": ">=11.0.3",
     "cloth-config": ">=11.0.99"
   }
 }

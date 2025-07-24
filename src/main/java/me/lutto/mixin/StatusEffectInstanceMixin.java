@@ -9,6 +9,8 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,8 +23,9 @@ public class StatusEffectInstanceMixin {
     @Shadow
     private int duration;
 
+    @Final
     @Shadow
-    private StatusEffect type;
+    private RegistryEntry<StatusEffect> type;
 
     @Inject(at = @At("TAIL"), method = "update")
     private void injectUpdate(LivingEntity entity, Runnable overwriteCallback, CallbackInfoReturnable<Boolean> cir) {
@@ -33,9 +36,9 @@ public class StatusEffectInstanceMixin {
         PlayerEntity localPlayer = MinecraftClient.getInstance().player;
         if (!thisEntity.equals(localPlayer)) return;
 
-        if (!PotionWarningConfig.statusEffects.get(Registries.STATUS_EFFECT.getId(type))) return;
+        if (!PotionWarningConfig.statusEffects.get(Registries.STATUS_EFFECT.getId(type.value()))) return;
 
-        PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(type);
+        PotionWarningClient.getStatusEffectHudManager().triggerHudDisplay(type.value());
     }
 
 }
