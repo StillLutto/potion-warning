@@ -1,12 +1,11 @@
 name: Bug report
-about: "Create a report to help us fix an issue"
+description: "Create a report to help us fix an issue"
 title: "[Bug] "
 labels: "bug"
 body:
 - type: markdown
   attributes:
-  value: |
-    Thanks for taking the time to fill out this bug report! We really appreciate the support <3.
+  value: "Thanks for taking the time to fill out this bug report! We really appreciate the support <3."
 - type: textarea
   id: what-happened
   attributes:
